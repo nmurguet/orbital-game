@@ -33,7 +33,21 @@ public class rocket : MonoBehaviour {
 	private float ySpeed; 
 
 
+	//
 	private ParticleSystem emitter; 
+	private ParticleSystem right_emitter; 
+	private ParticleSystem left_emitter; 
+	private ParticleSystem front_emitter; 
+
+
+	public float mass; 
+
+
+	public float scale; 
+
+
+
+
 
 
 	// Use this for initialization
@@ -42,7 +56,19 @@ public class rocket : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D> ();
 		Debug.Log ("Inicio"); 
 		pulled = false; 
-		emitter = GetComponentInChildren<ParticleSystem> (); 
+		GameObject frontEmitter = GameObject.Find ("main_rocket");
+		GameObject left_rocket = GameObject.Find ("left_rocket");
+		GameObject right_rocket = GameObject.Find ("right_rocket");
+		GameObject front_rocket = GameObject.Find ("front_rocket");
+		emitter = frontEmitter.GetComponent<ParticleSystem> (); 
+		right_emitter = right_rocket.GetComponent<ParticleSystem> ();
+		left_emitter = left_rocket.GetComponent<ParticleSystem> ();
+		front_emitter = front_rocket.GetComponent<ParticleSystem> ();
+
+		//emitter = GetComponentInChildren<ParticleSystem> (); 
+
+
+
 
 
 		
@@ -51,18 +77,22 @@ public class rocket : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		Movement (); 
-
-	
-		pullForce = (target.lossyScale.y / distance) * 5f; 
+		mass = target.GetComponent<Planet> ().mass; 
+		pullForce = (mass / distance) * 5f; 
+		//pullForce = (target.lossyScale.y / distance) * 5f; 
 
 		if (pullForce > 5.5f) {
 			pullForce = 5.5f;
 		}
-		//pullForce = target.lossyScale.y/2f;
+
 
 
 		velocity = rb.velocity.magnitude; 
+
+
+		Movement (); 
+
+
 
 		if (Input.GetKey (KeyCode.R)) {
 
@@ -77,6 +107,8 @@ public class rocket : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+		
+
 		ManageGravity (); 
 		//DrawTrajectory (this.transform.position, rb.velocity); 
 
@@ -115,23 +147,30 @@ public class rocket : MonoBehaviour {
 		if (Input.GetKey (KeyCode.S)) {
 			//thrust -= 0.01f;
 			rb.AddRelativeForce (Vector2.up * -thrust);
+			front_emitter.Play ();
 
 		}
 
-		if (Input.GetKey (KeyCode.Q)) {
+		if (Input.GetKeyDown (KeyCode.Q)) {
 			//thrust += 0.01f;
-			rb.AddRelativeForce (Vector2.right * -thrust);
+			rb.AddRelativeForce (Vector2.right * -strafe_thrust);
+			right_emitter.Emit (200);
 
 		}
-		if (Input.GetKey (KeyCode.E)) {
+		if (Input.GetKeyDown (KeyCode.E)) {
 			//thrust -= 0.01f;
-			rb.AddRelativeForce (Vector2.right * thrust);
+			rb.AddRelativeForce (Vector2.right * strafe_thrust);
+			left_emitter.Emit (200);
 
 		}
 
 
 		if (Input.GetKeyUp (KeyCode.W)) {
 			emitter.Stop (); 
+
+		}
+		if (Input.GetKeyUp (KeyCode.S)) {
+			front_emitter.Stop (); 
 
 		}
 
@@ -146,7 +185,9 @@ public class rocket : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D other)
 	{
 		if (other.gameObject.tag == "orbit") {
-			target = other.transform;
+			//target = other.transform;
+			target = other.transform.parent.transform;
+			scale = target.lossyScale.y; 
 			other.gameObject.GetComponentInParent<SpriteRenderer> ().color = new Color (Color.blue.r,Color.blue.g,Color.blue.b,1f);
 
 
@@ -156,7 +197,8 @@ public class rocket : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D other)
 	{
 		if (other.gameObject.tag == "orbit") {
-			target = other.transform; 
+			//target = other.transform; 
+			target = other.transform.parent.transform;
 			//other.gameObject.GetComponent<SpriteRenderer> ().color = new Color (Color.white.r,Color.white.g,Color.white.b,1f);
 			other.gameObject.GetComponentInParent<SpriteRenderer> ().color = new Color (Color.white.r,Color.white.g,Color.white.b,1f);
 		}
@@ -164,22 +206,22 @@ public class rocket : MonoBehaviour {
 
 
 	void ManageGravity(){
-		atmosphere = target.lossyScale.y;
+		atmosphere = mass;
 		dir = transform.position - target.transform.position;
 		distance = Vector2.Distance (transform.position, target.position);
 
-		if (distance < target.lossyScale.y + 20) {
+		if (distance < mass + 20) {
 			rb.AddForce (-dir.normalized * pullForce);
 			pulled = true; 
 
-		} else if (distance > target.lossyScale.y + 20) {
+		} else if (distance > mass + 20) {
 
 
 			pulled = false;
 		}
-		if (distance < target.lossyScale.y) {
+		if (distance < mass) {
 			rb.drag = 0.2f; 
-		} else if (distance > target.lossyScale.y) {
+		} else if (distance > mass) {
 			rb.drag = 0f; 
 		}
 
