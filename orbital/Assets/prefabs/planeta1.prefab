@@ -113,8 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8fc2ec7d51a1b4a92bed27a41a11e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  influence: 1.85
+  influence: 2.5
   mass: 10
+  nombres: []
+  Aleatorio: 
 --- !u!212 &212718985859319332
 SpriteRenderer:
   m_ObjectHideFlags: 1

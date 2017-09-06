@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Planet : MonoBehaviour {
 
 	private CircleCollider2D radius; 
@@ -11,16 +12,27 @@ public class Planet : MonoBehaviour {
 
 	public float mass; 
 	
-	public float borrar; 
 
 
+	public List<string>	nombres;
+
+	public string Aleatorio; 
 
 	// Use this for initialization
 	void Start () {
+
+
 		Transform child = transform.GetChild (0);
 		radius = child.GetComponent<CircleCollider2D> (); 
 
+
+
 		radius.radius = influence; 
+		AddNames ();
+
+		Aleatorio = nombres [Random.Range (0, nombres.Count)];
+
+	
 	}
 	
 	// Update is called once per frame
@@ -29,5 +41,13 @@ public class Planet : MonoBehaviour {
 	}
 
 
+	void AddNames(){
+		nombres.Add ("Tierra");
+		nombres.Add ("Marte");
+		nombres.Add ("Neptuno");
+		nombres.Add("Jupiter");
+		nombres.Add("Saturno");
 
+
+	}
 }

@@ -52,18 +52,34 @@ public class Arrow : MonoBehaviour {
 		
 	}
 */
-	void OnTriggerStay2D(Collider2D other)
+	void OnTriggerEnter2D(Collider2D other)
 	{
+		/*
 		collider_name = other.gameObject.name; 
 		if (other.gameObject.name == target.gameObject.name) {
 			sr.enabled = false; 
 			Debug.Log ("paso por aca");
 
 
-		} else
-			sr.enabled = true; 
-
+		} 
+*/
 
 	}
+
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		/*
+		collider_name = other.gameObject.name;
+		if (other.gameObject.name == target.gameObject.name) {
+			sr.enabled = true; 
+
+		}
+
+*/
+
+	}
+
+
 
 }
