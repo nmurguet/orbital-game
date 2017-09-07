@@ -14,6 +14,8 @@ public class Arrow : MonoBehaviour {
 
 	public string collider_name; 
 
+	public float distance; 
+
 	// Use this for initialization
 	void Start () {
 		sr= GetComponent<SpriteRenderer> ();
@@ -36,6 +38,9 @@ public class Arrow : MonoBehaviour {
 		viewPos.x = Mathf.Clamp01 (viewPos.x); 
 		viewPos.y = Mathf.Clamp01 (viewPos.y); 
 		transform.position = Camera.main.ViewportToWorldPoint (viewPos); 
+
+
+		distance = Vector2.Distance (transform.position, target.position);
 
 
 

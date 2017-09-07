@@ -46,6 +46,12 @@ public class rocket : MonoBehaviour {
 	public float scale; 
 
 
+	public float check_distance; 
+
+	public Transform tar;
+	public Transform tar2;
+
+
 
 
 
@@ -77,8 +83,10 @@ public class rocket : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		check_distance = Vector2.Distance(tar2.transform.position, tar.transform.position);
+
 		mass = target.GetComponent<Planet> ().mass; 
-		pullForce = (mass / distance) * 5f; 
+		pullForce = (mass / distance) * 6f; 
 		//pullForce = (target.lossyScale.y / distance) * 5f; 
 
 		if (pullForce > 5.5f) {

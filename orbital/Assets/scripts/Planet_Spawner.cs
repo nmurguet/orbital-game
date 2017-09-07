@@ -16,9 +16,13 @@ public class Planet_Spawner : MonoBehaviour {
 
 	public List<Vector2> list_of_planets;
 
+	private bool can_deploy;
+
 
 	// Use this for initialization
 	void Start () {
+
+		can_deploy = false; 
 
 		list_of_planets.Add (Home_planet.transform.position);
 
@@ -26,19 +30,25 @@ public class Planet_Spawner : MonoBehaviour {
 
 		for (int i = 0; i <= count; i++) {
 			
-			pos = new Vector2 (Random.Range (-300, 300), Random.Range (-300, 300));
+			pos = new Vector2 (Random.Range (-500, 500), Random.Range (-500, 500));
 			for (int x = 0; x <= list_of_planets.Count; x++) {
 				if (x < list_of_planets.Count) {
 					distance = Vector2.Distance (list_of_planets [x], pos);	
 					if(distance < 60){
-						x = list_of_planets.Count;
-
+						break;
 					}
-				} 
-			}
-			list_of_planets.Add (pos);
-			Instantiate (planet, pos, transform.rotation);
 
+				}
+				if (x == list_of_planets.Count) {
+					can_deploy = true;
+
+				} else
+					can_deploy = false; 
+			}
+			if (can_deploy == true) {
+				list_of_planets.Add (pos);
+				Instantiate (planet, pos, transform.rotation);
+			}
 		}
 
 		
