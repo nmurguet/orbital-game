@@ -3655,6 +3655,9 @@ MonoBehaviour:
   spawnPoint: {fileID: 0}
   mass: 0
   scale: 0
+  check_distance: 0
+  tar: {fileID: 238113725}
+  tar2: {fileID: 357810722}
 --- !u!212 &238113724
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4198,6 +4201,7 @@ MonoBehaviour:
   speed: 15
   target_name: 
   collider_name: 
+  distance: 0
 --- !u!58 &357810720
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4244,7 +4248,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d6603ee6b69be6e41b778e5a59af7a1a, type: 3}
   m_Color: {r: 0.9705882, g: 0.078503475, b: 0.096960254, a: 1}
   m_FlipX: 0
@@ -4381,10 +4385,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planet: {fileID: 1840939629601716, guid: 63abf3502d02f724ba57c7fdea0c50d7, type: 2}
   Home_planet: {fileID: 1323600681}
-  count: 30
+  count: 40
   distance: 0
   pos: {x: 0, y: 0}
-  list_of_planets: []
+  planetPositions: []
+  planets: []
+  arrow: {fileID: 357810719}
 --- !u!1 &664475824
 GameObject:
   m_ObjectHideFlags: 0

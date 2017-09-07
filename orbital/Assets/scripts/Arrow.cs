@@ -45,6 +45,13 @@ public class Arrow : MonoBehaviour {
 
 
 	}
+
+	public void SetTarget(Transform go)
+	{
+
+		target = go;
+
+	}
 	/*
 	void Update()
 	{

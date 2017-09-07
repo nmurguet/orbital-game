@@ -14,48 +14,47 @@ public class Planet_Spawner : MonoBehaviour {
 
 	public Vector2 pos;
 
-	public List<Vector2> list_of_planets;
+	public List<Vector2> planetPositions; 
+	public List<GameObject> planets;
 
-	private bool can_deploy;
 
+	public Arrow arrow;
 
 	// Use this for initialization
 	void Start () {
 
-		can_deploy = false; 
+		CreatePlanets (count); 
 
-		list_of_planets.Add (Home_planet.transform.position);
+	}
 
+	private void CreatePlanets(int targetCount, int minDistance=60) {
+		int createdCount = 0;
+		do {
+			Vector2 randomPos = new Vector2 (Random.Range (-500, 500), Random.Range (-500, 500));
 
+			if (randomPos.magnitude > minDistance &&
+				!planetPositions.Exists (
+					planetPosition => (Vector2.Distance (planetPosition, randomPos) < minDistance)
+				)
+			) {
+				planet = Instantiate(planet, randomPos, transform.rotation);
+				planet.name = "Planet "+createdCount;
+				planets.Add (planet);
+				planetPositions.Add (randomPos);
+				createdCount++;
 
-		for (int i = 0; i <= count; i++) {
-			
-			pos = new Vector2 (Random.Range (-500, 500), Random.Range (-500, 500));
-			for (int x = 0; x <= list_of_planets.Count; x++) {
-				if (x < list_of_planets.Count) {
-					distance = Vector2.Distance (list_of_planets [x], pos);	
-					if(distance < 60){
-						break;
-					}
-
-				}
-				if (x == list_of_planets.Count) {
-					can_deploy = true;
-
-				} else
-					can_deploy = false; 
 			}
-			if (can_deploy == true) {
-				list_of_planets.Add (pos);
-				Instantiate (planet, pos, transform.rotation);
-			}
-		}
-
-		
+		} while(createdCount < targetCount);	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+
+		if (Input.GetKeyDown (KeyCode.T)) {
+			//arrow.SetTarget (.position);
+			arrow.SetTarget(planets [Random.Range (0, planets.Count)].transform);
+		}
 
 
 

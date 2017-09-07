@@ -42,6 +42,7 @@ public class Planet : MonoBehaviour {
 
 
 	void AddNames(){
+		
 		nombres.Add ("Tierra");
 		nombres.Add ("Marte");
 		nombres.Add ("Neptuno");

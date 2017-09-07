@@ -118,7 +118,7 @@ public class rocket : MonoBehaviour {
 		
 
 		ManageGravity (); 
-		//DrawTrajectory (this.transform.position, rb.velocity); 
+		//DrawTrajectory (this.transform.position, rb.velocity); por?
 
 	}
 
