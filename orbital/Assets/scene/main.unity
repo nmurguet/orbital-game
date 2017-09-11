@@ -3647,6 +3647,7 @@ MonoBehaviour:
   torque: 0.4
   thrust: 5
   strafe_thrust: 30
+  max_speed: 20
   pulled: 0
   target: {fileID: 1323600681}
   pullForce: 0
@@ -3707,7 +3708,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 238113722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.58, y: 5.76, z: 0}
+  m_LocalPosition: {x: -3.58, y: 31.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 664475825}
@@ -4385,7 +4386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planet: {fileID: 1840939629601716, guid: 63abf3502d02f724ba57c7fdea0c50d7, type: 2}
   Home_planet: {fileID: 1323600681}
-  count: 40
+  count: 4
   planetPositions: []
   planets: []
   arrow: {fileID: 357810719}
@@ -11512,7 +11513,20 @@ Prefab:
     - target: {fileID: 114402999022295724, guid: 63abf3502d02f724ba57c7fdea0c50d7,
         type: 2}
       propertyPath: influence
-      value: 3
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725232503505478, guid: 63abf3502d02f724ba57c7fdea0c50d7, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725232503505478, guid: 63abf3502d02f724ba57c7fdea0c50d7, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402999022295724, guid: 63abf3502d02f724ba57c7fdea0c50d7,
+        type: 2}
+      propertyPath: mass
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63abf3502d02f724ba57c7fdea0c50d7, type: 2}
@@ -11731,7 +11745,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1905992329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -63.9, y: -2.9, z: 0}
+  m_LocalPosition: {x: 175.6, y: 147.2, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 2063787027}

@@ -8,6 +8,8 @@ public class Planet_Spawner : MonoBehaviour {
 
 	public Transform Home_planet; 
 
+
+
 	public int count; 
 
 	public List<Vector2> planetPositions;
@@ -21,7 +23,7 @@ public class Planet_Spawner : MonoBehaviour {
 		CreatePlanets (count);
 	}
 
-	private void CreatePlanets(int targetCount, int minDistance=60) {
+	private void CreatePlanets(int targetCount, int minDistance=200) {
 		int createdCount = 0;
 		do {
 			Vector2 randomPos = new Vector2 (Random.Range (-500, 500), Random.Range (-500, 500));

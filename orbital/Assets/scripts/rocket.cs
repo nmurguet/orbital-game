@@ -10,6 +10,8 @@ public class rocket : MonoBehaviour {
 	public float thrust; 
 	public float strafe_thrust; 
 
+	public float max_speed; 
+
 	public bool pulled; 
 
 	private Vector2 dir; 
@@ -125,17 +127,9 @@ public class rocket : MonoBehaviour {
 	void Movement()
 	{
 
-		//rb.AddRelativeForce (Vector2.up * thrust);
-		rb.velocity = Vector2.ClampMagnitude (rb.velocity, 10f);
 
-		if (thrust > 10f) {
-			thrust = 10f;
+		rb.velocity = Vector2.ClampMagnitude (rb.velocity, max_speed);
 
-		}
-		if (thrust < -10f) {
-			thrust = -10f;
-
-		}
 
 		if (Input.GetKey (KeyCode.A)) {
 			rb.AddTorque (0.3f * torque);
@@ -218,11 +212,11 @@ public class rocket : MonoBehaviour {
 		dir = transform.position - target.transform.position;
 		distance = Vector2.Distance (transform.position, target.position);
 
-		if (distance < mass + 20) {
+		if (distance < mass + 100) {
 			rb.AddForce (-dir.normalized * pullForce);
 			pulled = true; 
 
-		} else if (distance > mass + 20) {
+		} else if (distance > mass + 100) {
 
 
 			pulled = false;
