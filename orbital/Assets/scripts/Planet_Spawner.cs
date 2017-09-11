@@ -23,7 +23,7 @@ public class Planet_Spawner : MonoBehaviour {
 		CreatePlanets (count);
 	}
 
-	private void CreatePlanets(int targetCount, int minDistance=200) {
+	private void CreatePlanets(int targetCount, int minDistance=300) {
 		int createdCount = 0;
 		do {
 			Vector2 randomPos = new Vector2 (Random.Range (-500, 500), Random.Range (-500, 500));

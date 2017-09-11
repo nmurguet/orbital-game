@@ -16,9 +16,15 @@ public class CameraFollow : MonoBehaviour {
 
 
 	public float zoom; 
+
+
+
+	private float store_zoom; 
+	private bool zoomout; 
 	// Use this for initialization
 	void Start () {
 		following = true; 
+		zoomout = false; 
 		
 	}
 	
@@ -44,5 +50,28 @@ public class CameraFollow : MonoBehaviour {
 			}
 
 		}
+
+		if (Input.GetKeyDown (KeyCode.Z)) {
+			if (!zoomout) {
+				store_zoom = myCamera.orthographicSize; 
+
+				myCamera.orthographicSize = 500f;
+				zoomout = true; 
+			} else {
+				myCamera.orthographicSize = store_zoom;
+				zoomout = false; 
+
+			}
+
+
+
+
+
+
+
+		}
+
+
+
 	}
 }

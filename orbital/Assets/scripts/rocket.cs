@@ -54,7 +54,7 @@ public class rocket : MonoBehaviour {
 	public Transform tar2;
 
 
-
+	public List<GameObject> overlapping; 
 
 
 
@@ -84,7 +84,7 @@ public class rocket : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		//ManageTargets ();
 		check_distance = Vector2.Distance(tar2.transform.position, tar.transform.position);
 
 		mass = target.GetComponent<Planet> ().mass; 
@@ -186,23 +186,59 @@ public class rocket : MonoBehaviour {
 
 	void OnTriggerStay2D(Collider2D other)
 	{
+
+
+
+		// Posible fix a esto. Agregar a una lista los objetos que entran al trigger, y de ahi chequear la distancia,
+		// el mas cercano es el que tendria que estar activo. Ahora si hay overlap hace cualquier cosa. 
+
 		if (other.gameObject.tag == "orbit") {
-			//target = other.transform;
+
 			target = other.transform.parent.transform;
 			scale = target.lossyScale.y; 
 			other.gameObject.GetComponentInParent<SpriteRenderer> ().color = new Color (Color.blue.r,Color.blue.g,Color.blue.b,1f);
+			}
+
 
 
 		}
+
+
+	void ManageTargets()
+	{
+		float dist = 0;
+
+		for (int i = 0; i < overlapping.Count; i++) {
+			float check = Vector2.Distance (gameObject.transform.position, overlapping [i].transform.position);
+			if (check > dist) {
+				target = overlapping [i].transform;
+
+			}
+		}
+
+
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		/*
+		if (other.gameObject.tag == "orbit") {
+			overlapping.Add (other.transform.parent.gameObject);
+
+		}*/
+
+
+
 
 	}
 	void OnTriggerExit2D(Collider2D other)
 	{
 		if (other.gameObject.tag == "orbit") {
-			//target = other.transform; 
+			
 			target = other.transform.parent.transform;
-			//other.gameObject.GetComponent<SpriteRenderer> ().color = new Color (Color.white.r,Color.white.g,Color.white.b,1f);
+
 			other.gameObject.GetComponentInParent<SpriteRenderer> ().color = new Color (Color.white.r,Color.white.g,Color.white.b,1f);
+			overlapping.Remove (other.transform.parent.gameObject);
 		}
 	}
 
