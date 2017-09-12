@@ -3733,6 +3733,7 @@ MonoBehaviour:
   check_distance: 0
   tar: {fileID: 238113725}
   tar2: {fileID: 357810722}
+  overlapping: []
 --- !u!212 &238113724
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4099,7 +4100,7 @@ GameObject:
   - component: {fileID: 323339435}
   - component: {fileID: 323339437}
   - component: {fileID: 323339436}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4566,7 +4567,7 @@ GameObject:
   - component: {fileID: 664475825}
   - component: {fileID: 664475827}
   - component: {fileID: 664475826}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4845,7 +4846,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1311752293
+  randomSeed: 555380996
   InitialModule:
     serializedVersion: 3
     enabled: 1

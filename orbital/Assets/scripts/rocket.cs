@@ -84,7 +84,7 @@ public class rocket : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//ManageTargets ();
+		ManageTargets ();
 		check_distance = Vector2.Distance(tar2.transform.position, tar.transform.position);
 
 		mass = target.GetComponent<Planet> ().mass; 
@@ -191,7 +191,7 @@ public class rocket : MonoBehaviour {
 
 		// Posible fix a esto. Agregar a una lista los objetos que entran al trigger, y de ahi chequear la distancia,
 		// el mas cercano es el que tendria que estar activo. Ahora si hay overlap hace cualquier cosa. 
-
+		/*
 		if (other.gameObject.tag == "orbit") {
 
 			target = other.transform.parent.transform;
@@ -199,33 +199,39 @@ public class rocket : MonoBehaviour {
 			other.gameObject.GetComponentInParent<SpriteRenderer> ().color = new Color (Color.blue.r,Color.blue.g,Color.blue.b,1f);
 			}
 
-
+*/
 
 		}
 
 
 	void ManageTargets()
 	{
-		float dist = 0;
 
-		for (int i = 0; i < overlapping.Count; i++) {
-			float check = Vector2.Distance (gameObject.transform.position, overlapping [i].transform.position);
-			if (check > dist) {
-				target = overlapping [i].transform;
+		 GameObject nearestPlanet;
+		float nearestDistance=float.MaxValue;
+		float distance;
+ 
+		foreach(GameObject planet in overlapping) {
+			distance = Vector2.Distance(transform.position, planet.transform.position);
+				if (distance<nearestDistance) {
+				nearestDistance=distance;
+					nearestPlanet=planet;
+				target = nearestPlanet.transform;
 
+				}
 			}
-		}
+
 
 
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		/*
+		
 		if (other.gameObject.tag == "orbit") {
 			overlapping.Add (other.transform.parent.gameObject);
 
-		}*/
+		}
 
 
 
@@ -235,9 +241,9 @@ public class rocket : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "orbit") {
 			
-			target = other.transform.parent.transform;
+			//target = other.transform.parent.transform;
 
-			other.gameObject.GetComponentInParent<SpriteRenderer> ().color = new Color (Color.white.r,Color.white.g,Color.white.b,1f);
+			//other.gameObject.GetComponentInParent<SpriteRenderer> ().color = new Color (Color.white.r,Color.white.g,Color.white.b,1f);
 			overlapping.Remove (other.transform.parent.gameObject);
 		}
 	}
