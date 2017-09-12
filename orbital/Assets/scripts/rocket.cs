@@ -88,7 +88,7 @@ public class rocket : MonoBehaviour {
 		check_distance = Vector2.Distance(tar2.transform.position, tar.transform.position);
 
 		mass = target.GetComponent<Planet> ().mass; 
-		pullForce = (mass / distance) * 6f; 
+		pullForce = (mass / distance) * 4f; 
 		//pullForce = (target.lossyScale.y / distance) * 5f; 
 
 		if (pullForce > 5.5f) {

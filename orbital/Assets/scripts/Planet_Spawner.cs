@@ -26,7 +26,7 @@ public class Planet_Spawner : MonoBehaviour {
 	private void CreatePlanets(int targetCount, int minDistance=300) {
 		int createdCount = 0;
 		do {
-			Vector2 randomPos = new Vector2 (Random.Range (-500, 500), Random.Range (-500, 500));
+			Vector2 randomPos = new Vector2 (Random.Range (-800, 800), Random.Range (-800, 800));
 			if (randomPos.magnitude > minDistance &&
 				!planetPositions.Exists (
 					planetPosition => (Vector2.Distance (planetPosition, randomPos) < minDistance)

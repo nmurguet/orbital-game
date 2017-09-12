@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour {
 
 
 	private float store_zoom; 
-	private bool zoomout; 
+	public bool zoomout; 
 	// Use this for initialization
 	void Start () {
 		following = true; 
